@@ -1,0 +1,46 @@
+<div>
+  <div class="mb-3">
+    <a routerLink="indication/create">
+      <button type="button" class="btn btn-primary">Nova Indicação</button>
+    </a>
+  </div>
+  <div class="alert alert-success alert-dimissible fade show" *ngIf="submitted" role="alert">
+    <strong>{{ message }}</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Cpf</th>
+        <th scope="col">E-mail</th>
+        <th scope="col">telefone</th>
+        <th scope="col">Status</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let indication of indications; let i = index">
+        <tr>
+          <th scope="row">{{ indication.id }}</th>
+          <td>{{ indication.nome }}</td>
+          <td>{{ indication.cpf }}</td>
+          <td>{{ indication.email }}</td>
+          <td>{{ indication.telefone }}</td>
+          <td>{{ indication.status_id }}</td>
+          <td>
+            <div class="btn-group" role="group" aria-label="Exemplo básico">
+              <button [class.disabled]="indication.status_id === 3" type="button" class="btn btn-warning"
+                (click)="updateStatus(indication.id, indication.status_id)">Alterar Status</button>
+              <button [class.disabled]="indication.status_id === 2" type="button" class="btn btn-danger"
+                (click)="deleteIndication(indication.id, indication.status_id)">Deletar</button>
+            </div>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>
